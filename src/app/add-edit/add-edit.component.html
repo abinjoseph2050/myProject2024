@@ -1,0 +1,54 @@
+@if(!isEdit){
+<p>Add new book</p>
+} @else {
+<p>Edit book {{currentBook.title}}</p>
+}
+
+<form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+   <div class="input-form">
+      <mat-form-field class="example-form-field">
+         <mat-label>Book Title</mat-label>
+         <input matInput type="text" formControlName="titleName">
+         <button matSuffix mat-icon-button aria-label="Clear">
+            <mat-icon>close</mat-icon>
+         </button>
+      </mat-form-field>
+
+      <mat-form-field class="example-form-field">
+         <mat-label>Author Name</mat-label>
+         <input matInput type="text" formControlName="authorName">
+         <button matSuffix mat-icon-button aria-label="Clear">
+            <mat-icon>close</mat-icon>
+         </button>
+      </mat-form-field>
+
+      <mat-form-field class="example-form-field">
+         <mat-label>Publish Year</mat-label>
+         <input matInput type="number" formControlName="publishedYear">
+         <button matSuffix mat-icon-button aria-label="Clear">
+            <mat-icon>close</mat-icon>
+         </button>
+      </mat-form-field>
+
+      <!-- chips for tag -->
+      <mat-form-field class="example-chip-list">
+         <mat-label>Book tags</mat-label>
+         <mat-chip-grid #chipGrid aria-label="Enter tags">
+            @for (tag of tags; track tag) {
+            <mat-chip-row (removed)="remove(tag)" [editable]="true" (edited)="edit(tag, $event)"
+               [aria-description]="'press enter to edit ' + tag.name">
+               {{tag.name}}
+               <button matChipRemove [attr.aria-label]="'remove ' + tag.name">
+                  <mat-icon>cancel</mat-icon>
+               </button>
+            </mat-chip-row>
+            }
+            <input placeholder="New tag..." [matChipInputFor]="chipGrid"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+               (matChipInputTokenEnd)="add($event)" />
+         </mat-chip-grid>
+      </mat-form-field>
+
+      <button mat-raised-button type="submit">Submit</button>
+   </div>
+</form>

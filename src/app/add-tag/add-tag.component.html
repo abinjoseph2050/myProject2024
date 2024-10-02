@@ -1,0 +1,25 @@
+<p>Add / Edit book tags of "{{currentBook.title}}."</p>
+<form [formGroup]="tagForm" (ngSubmit)="addTag()">
+   <div class="input-form">
+      <!-- chips for tag -->
+      <mat-form-field class="example-chip-list">
+         <mat-label>Book tags</mat-label>
+         <mat-chip-grid #chipGrid aria-label="Enter tags">
+            @for (tag of tags; track tag) {
+            <mat-chip-row (removed)="remove(tag)" [editable]="true" (edited)="edit(tag, $event)"
+               [aria-description]="'press enter to edit ' + tag.name">
+               {{tag.name}}
+               <button matChipRemove [attr.aria-label]="'remove ' + tag.name">
+                  <mat-icon>cancel</mat-icon>
+               </button>
+            </mat-chip-row>
+            }
+            <input placeholder="New tag..." [matChipInputFor]="chipGrid"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+               (matChipInputTokenEnd)="add($event)" />
+         </mat-chip-grid>
+      </mat-form-field>
+
+      <button mat-raised-button type="submit">Add Tag</button>
+   </div>
+</form>

@@ -1,0 +1,59 @@
+<div class="main-container">
+   <div class="title">
+      <h3>Book Store</h3>
+      <h5>Number of available books {{bookData.length}}</h5>
+
+   </div>
+   <div class="table-container">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+         <!-- Position Column -->
+         <ng-container matColumnDef="sl">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let book"> {{book.sl}} </td>
+         </ng-container>
+
+         <!-- Name Column -->
+         <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef> Title </th>
+            <td mat-cell *matCellDef="let book"> {{book.title}} {{book.sl}} </td>
+         </ng-container>
+
+         <!-- Weight Column -->
+         <ng-container matColumnDef="author">
+            <th mat-header-cell *matHeaderCellDef> Author </th>
+            <td mat-cell *matCellDef="let book"> {{book.author}} </td>
+         </ng-container>
+
+         <!-- Year -->
+         <ng-container matColumnDef="year">
+            <th mat-header-cell *matHeaderCellDef> Pub. Year </th>
+            <td mat-cell *matCellDef="let book"> {{book.year}} </td>
+         </ng-container>
+
+         <!-- Tags -->
+         <ng-container matColumnDef="tags">
+            <th mat-header-cell *matHeaderCellDef> Tags </th>
+            <td mat-cell *matCellDef="let book">
+               @for(tag of book.tags; track tag){
+               <p>{{tag}}</p>
+               }
+            </td>
+         </ng-container>
+
+         <!-- Symbol Column -->
+         <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let book">
+               <button mat-stroked-button color="primary" (click)="openDialog('450ms', '400ms', book)">Edit</button>
+               <button mat-stroked-button color="warn" class="m-2" (click)="deleteBook(book.sl)">Delete</button>
+               <button mat-stroked-button color="basic" class="m-2" (click)="openEditTag(book)">Add Tag</button>
+            </td>
+         </ng-container>
+
+         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <button mat-flat-button color="primary" class="add-book-buttton" (click)="openDialog('100ms','100ms','')">Add
+         Book</button>
+   </div>
+</div>

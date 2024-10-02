@@ -1,0 +1,53 @@
+.demo-table {
+  width: 100%;
+}
+
+.mat-column-demo-position {
+  width: 32px;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-column-demo-name {
+  padding-left: 16px;
+  font-size: 20px;
+}
+
+.mat-column-demo-weight {
+  font-style: italic;
+}
+
+.mat-column-demo-symbol {
+  width: 32px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.main-container {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .title {
+    text-align: center;
+  }
+
+  .table-container {
+    width: 90%;
+    position: relative;
+    margin: 10px;
+
+    .add-book-buttton {
+      position: absolute;
+      top: 10px;
+      inset-inline-end: 15%;
+    }
+  }
+}
